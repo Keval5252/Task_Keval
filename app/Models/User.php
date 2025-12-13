@@ -68,4 +68,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(AttendanceRecord::class);
     }
+
+    public function biometricIdentities(): HasMany
+    {
+        return $this->hasMany(BiometricIdentity::class);
+    }
 }

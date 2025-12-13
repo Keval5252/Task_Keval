@@ -13,6 +13,9 @@ class AttendanceRecord extends Model
     protected $fillable = [
         'user_id',
         'shift_id',
+        'source',
+        'source_biometric_device_id',
+        'source_biometric_punch_event_id',
         'clock_in_at',
         'clock_out_at',
         'scheduled_start_at',
@@ -37,6 +40,16 @@ class AttendanceRecord extends Model
     public function shift(): BelongsTo
     {
         return $this->belongsTo(Shift::class);
+    }
+
+    public function sourceBiometricDevice(): BelongsTo
+    {
+        return $this->belongsTo(BiometricDevice::class, 'source_biometric_device_id');
+    }
+
+    public function sourceBiometricPunchEvent(): BelongsTo
+    {
+        return $this->belongsTo(BiometricPunchEvent::class, 'source_biometric_punch_event_id');
     }
 }
 
