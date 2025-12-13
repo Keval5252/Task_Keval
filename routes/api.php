@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/auth/logout', [ApiAuthController::class, 'logout']);
 
     Route::get('/me', [ApiAttendanceController::class, 'me']);
+    Route::get('/attendance', [ApiAttendanceController::class, 'index']);
     Route::post('/attendance/clock-in', [ApiAttendanceController::class, 'clockIn']);
     Route::post('/attendance/clock-out', [ApiAttendanceController::class, 'clockOut']);
 });

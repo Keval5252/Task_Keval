@@ -12,6 +12,24 @@ use Illuminate\Validation\ValidationException;
 
 class AttendanceController extends Controller
 {
+    public function index(Request $request)
+    {
+        $user = $request->user();
+
+        $limit = max(1, min(100, (int) $request->query('limit', 30)));
+
+        $records = AttendanceRecord::query()
+            ->where('user_id', $user->id)
+            ->with('shift')
+            ->latest('clock_in_at')
+            ->limit($limit)
+            ->get();
+
+        return response()->json([
+            'data' => $records,
+        ]);
+    }
+
     public function clockIn(Request $request)
     {
         $user = $request->user();
