@@ -11,6 +11,8 @@ use App\Http\Controllers\Admin\ShiftController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\ShiftAssignmentController;
 use App\Http\Controllers\Admin\AttendanceController;
+use App\Http\Controllers\Employee\AuthController as EmployeeAuthController;
+use App\Http\Controllers\Employee\AttendanceController as EmployeeAttendanceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +26,23 @@ Route::middleware('guest')->group(function () {
 
     Route::post('login', [AuthController::class, 'login']);
     Route::post('register', [AuthController::class, 'register']);
+});
+
+Route::prefix('employee')->name('employee.')->group(function () {
+    Route::middleware('guest')->group(function () {
+        Route::get('login', [EmployeeAuthController::class, 'loginIndex'])->name('login');
+        Route::post('login', [EmployeeAuthController::class, 'login'])->name('login.post');
+    });
+
+    Route::middleware(['auth', 'employee'])->group(function () {
+        Route::get('/', [EmployeeAttendanceController::class, 'dashboard'])->name('dashboard');
+        Route::get('attendance', [EmployeeAttendanceController::class, 'attendanceReport'])->name('attendance.index');
+
+        Route::post('clock-in', [EmployeeAttendanceController::class, 'clockIn'])->name('clockin');
+        Route::post('clock-out', [EmployeeAttendanceController::class, 'clockOut'])->name('clockout');
+
+        Route::get('logout', [EmployeeAuthController::class, 'logout'])->name('logout');
+    });
 });
 
 
