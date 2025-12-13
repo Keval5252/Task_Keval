@@ -35,8 +35,8 @@
                                 <a class="fw-medium" href="{{url('register')}}">
                                    Admin Register
                                 </a> ||
-                                <a class="fw-medium" href="{{url('customer-register')}}">
-                                   Customer Register
+                                <a class="fw-medium" href="{{ route('employee.login') }}">
+                                   Employee Login
                                 </a>
                             </p>
                         </div>
