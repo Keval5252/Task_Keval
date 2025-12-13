@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => \App\Http\Middleware\EnsureAdmin::class,
         'employee' => \App\Http\Middleware\EnsureEmployee::class,
+        'biometric.device' => \App\Http\Middleware\AuthenticateBiometricDevice::class,
     ];
 }

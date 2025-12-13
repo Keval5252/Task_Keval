@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController as ApiAuthController;
 use App\Http\Controllers\Api\AttendanceController as ApiAttendanceController;
+use App\Http\Controllers\Api\BiometricPunchController as ApiBiometricPunchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,4 +29,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', [ApiAttendanceController::class, 'me']);
     Route::post('/attendance/clock-in', [ApiAttendanceController::class, 'clockIn']);
     Route::post('/attendance/clock-out', [ApiAttendanceController::class, 'clockOut']);
+});
+
+// Biometric devices (fingerprint scanners) call this endpoint after verification.
+Route::middleware(['biometric.device'])->group(function () {
+    Route::post('/biometric/punch', [ApiBiometricPunchController::class, 'punch']);
 });
