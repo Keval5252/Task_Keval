@@ -10,7 +10,7 @@
                     <div class="card shadow-sm border-0 p-3">
                         <div class="text-center">
                             <h5 class="text-success fw-semibold">
-                                {{auth()->user()->name}}
+                                {{auth()->user()->first_name}} {{auth()->user()->last_name}}
                             </h5>
                             <p class="text-secondary">
                                 {{auth()->user()->email}}
