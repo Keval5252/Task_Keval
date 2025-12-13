@@ -39,7 +39,7 @@ class AuthController extends Controller
             }
 
             if (Auth::user()->role === 'admin') {
-                return redirect('/');
+                return redirect('/admin');
             }
 
             Auth::logout();
@@ -90,7 +90,7 @@ class AuthController extends Controller
         $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->password = \Hash::make($request->password);
-        $user->role = 'customer';
+        $user->role = 'employee';
         $user->save();
 
         $user->sendEmailVerificationNotification();
